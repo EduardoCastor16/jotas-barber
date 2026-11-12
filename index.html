@@ -1,1 +1,37 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><meta name="theme-color" content="#101010"/><title>Barbearia do Jota's | Agendamentos</title></head><body><div id="root"></div><script type="module" src="/src/main.jsx"></script></body></html>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#171c23">
+  <meta name="description" content="Agende seu horário com o Barbearia do Jota's. Escolha os serviços, a data e reserve em poucos passos.">
+  <title>Barbearia do Jota's | Agendamento</title>
+  <link rel="icon" type="image/svg+xml" href="/logo.png">
+  <link rel="stylesheet" href="/styles.css?v=jotas-v1">
+</head>
+<body>
+  <div class="shell">
+    <main class="main">
+      <header class="top">
+        <div class="brand"><img class="brand-logo" src="/logo.png" alt="Barbearia do Jota's" width="82" height="82"></div>
+        <button class="header-lookup" id="headerLookup" type="button">Meus agendamentos</button>
+      </header>
+      <div class="intro">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> AGENDA ONLINE</div>
+        <h1>Seu próximo corte<br><em>começa aqui.</em></h1>
+        <p>Escolha o serviço, encontre um horário e deixe o resto com a gente. Simples assim.</p>
+        <div class="hours"><span><b>SEG A SEX</b> A definir</span><span><b>SÁBADO</b> A definir</span></div>
+      </div>
+      <div class="steps" aria-label="Etapas"><span class="step active" id="step1"><b>01</b> Serviços</span><span class="step" id="step2"><b>02</b> Horário</span><span class="step" id="step3"><b>03</b> Seus dados</span></div>
+      <section id="content" aria-live="polite"></section>
+      <p class="legal">Seus dados são usados para registrar e consultar sua reserva.</p>
+    </main>
+    <aside class="side" aria-label="Resumo do agendamento">
+      <div class="side-inner"><div class="eyebrow">SEU AGENDAMENTO</div><h2>Sua escolha<span>.</span></h2><p class="caption">Confira os detalhes antes de confirmar.</p><div id="summary"></div><div class="total"><span>Total estimado</span><b id="total">R$ 0,00</b></div><button class="next" id="desktopNext" type="button">Continuar</button><p class="note">O horário só será confirmado após a aprovação do Jota.</p></div>
+      <div class="side-signature">BARBEARIA DO JOTA'S <span>✳</span></div>
+    </aside>
+  </div>
+  <div class="mobile-bar"><div><small id="mobileCount">Nenhum serviço</small><strong id="mobileTotal">R$ 0,00</strong></div><button class="next" id="mobileNext" type="button">Continuar</button></div>
+  <script src="/app.js?v=jotas-v1" defer></script>
+</body>
+</html>
