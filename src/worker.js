@@ -4,6 +4,8 @@ export default {
     if (!url.pathname.startsWith('/api/')) return env.ASSETS.fetch(request);
     if (request.method !== 'POST') return Response.json({ok:false,error:'Método inválido'},{status:405});
     const action = url.pathname.slice(5);
+    // Não criar reservas sem fluxo de sinal Pix e aprovação manual.
+    if (action === 'book') return Response.json({ok:false,error:'Agendamentos ainda não habilitados: aguardando integração exclusiva do Jota e aprovação do sinal Pix.'},{status:503});
     if (!['catalog','availability','book','lookup'].includes(action)) return Response.json({ok:false,error:'Rota inválida'},{status:404});
     if (!env.APPS_SCRIPT_URL) return Response.json({ok:false,error:'Falta APPS_SCRIPT_URL no Worker'},{status:503});
     if (!env.API_SECRET) return Response.json({ok:false,error:'Falta API_SECRET no Worker'},{status:503});
