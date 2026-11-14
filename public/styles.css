@@ -151,3 +151,51 @@ body{background:#efefed}
 @media(max-width:980px){.shell{display:block}.main{max-width:850px}.side{display:none}.intro{grid-template-columns:minmax(180px,.75fr) 1.2fr}.mobile-bar{background:#141414}.mobile-bar .next{background:#f6f6f4;color:#171717}}
 @media(max-width:650px){.main{padding:0 16px 130px}.top{height:77px;margin-bottom:16px}.brand-wordmark{font-size:1.35rem}.header-lookup{padding:10px;font-size:.69rem}.intro{display:flex;flex-direction:column;min-height:0;padding:30px 26px 34px;margin-bottom:27px}.hero-identity{border-right:0;border-bottom:1px solid #ffffff24;min-height:0;padding:0 0 22px;margin-bottom:24px;justify-content:flex-start;width:100%}.hero-brand-logo{width:190px!important;max-height:160px!important;object-position:left}.intro h1{font-size:clamp(2.8rem,11vw,4.4rem);margin:15px 0}.intro p{font-size:.86rem}.hero-foot{margin-top:26px;font-size:.57rem;gap:10px}.services{grid-template-columns:1fr;gap:13px}.service-media{aspect-ratio:2.05}.service-body{padding:18px}.steps{margin-bottom:26px}.step{font-size:.68rem;padding:12px 2px}.step b{font-size:.77rem;margin-right:4px}.section-head h2{font-size:1.8rem}.mobile-bar{border-top:1px solid #ffffff26}.panel{padding:22px 18px}}
 @media(max-width:370px){.hero-brand-logo{width:160px!important}.intro h1{font-size:2.55rem}.brand-wordmark{font-size:1.2rem}}
+
+
+/* JOTA'S | Barber pole premium palette */
+:root{--j-ink:#111316;--j-paper:#f5f3ef;--j-navy:#19334b;--j-navy-light:#294d69;--j-wine:#792b39;--j-line:#dcdedc;--j-muted:#626c73;color:var(--j-ink);background:#eae9e6}
+body{background:#eae9e6}
+.shell{background:var(--j-paper)}
+.top{border-bottom-color:#d9d9d5}
+.brand-wordmark{color:var(--j-ink)}
+.header-lookup{border-color:#9ea9b0;color:var(--j-navy);background:#fff}
+.header-lookup:hover{background:var(--j-navy);border-color:var(--j-navy);color:white}
+.intro{background:linear-gradient(125deg,#101317 0%,#172330 72%,#1c3042 100%)}
+.intro:before{border-color:#ffffff24}
+.intro .eyebrow{color:#e6d5d9}
+.intro .eyebrow-dot{background:var(--j-wine);box-shadow:0 0 0 5px #792b394a}
+.intro h1 em{color:#e5c2c9}
+.hero-identity{border-right-color:#ffffff30}
+.hero-foot{border-top-color:#ffffff30}
+.steps{border-bottom-color:#cbd2d7}
+.step{color:#687780}
+.step.active{color:var(--j-navy);border-color:var(--j-wine)}
+.section-head h2{color:#162331}
+.service.service-photo{border-color:#d8dfe1;background:#fff}
+.service.service-photo:hover{border-color:#8da3b2}
+.service.service-photo.selected{border-color:var(--j-navy);box-shadow:0 0 0 1px var(--j-navy)}
+.service-selected-tag{background:var(--j-navy);color:white}
+.service-body h3{color:#152638}
+.service-body .service-description{color:#66717a}
+.service-meta .price{color:var(--j-navy)}
+.service-duration{background:#eaf0f3;color:#2b4357}
+.service-select{background:var(--j-navy);border-color:var(--j-navy);color:#fff}
+.service-select:hover:not(:disabled){background:var(--j-navy-light);border-color:var(--j-navy-light)}
+.service.selected .service-select{background:#e7eff4;border-color:var(--j-navy);color:var(--j-navy)}
+.service-select:disabled{background:#ededeb;border-color:#d9d9d7;color:#666}
+.side{background:linear-gradient(160deg,#101317,#17202a 90%)}
+.side h2 span{color:#bd8d99}
+.side .next{background:#f4f1eb;color:#142a3e}
+.side .next:hover:not(:disabled){background:#dce7ef}
+.mobile-bar{background:#142536}
+.mobile-bar .next{background:#f4f1eb;color:#142a3e}
+.date.chosen,.slot.chosen{background:var(--j-navy);border-color:var(--j-navy);color:white}
+.date:hover:not(.chosen),.slot:hover:not(.chosen){border-color:var(--j-navy);color:var(--j-navy)}
+.next:not(.side .next):not(.mobile-bar .next){border-color:var(--j-navy)}
+.panel{border-color:#d9e0e3}
+.field input:focus,.field input:focus-visible{border-color:var(--j-navy);outline-color:#93adbd}
+button:focus-visible,a:focus-visible,input:focus-visible{outline-color:var(--j-wine)}
+.setup-notice{border-left:3px solid var(--j-wine)}
+.booking-status,.status{color:var(--j-wine)}
+@media(max-width:650px){.hero-identity{border-bottom-color:#ffffff35}}
