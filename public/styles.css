@@ -87,3 +87,67 @@ button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{o
 .brand-logo{width:64px;height:64px;object-fit:contain;background:transparent}
 .hero-brand-logo{display:block;width:min(320px,75%);height:auto;max-height:230px;object-fit:contain;object-position:left center;margin:0 0 22px;background:transparent}
 @media(max-width:620px){.hero-brand-logo{width:min(260px,85%);max-height:190px;margin-bottom:18px}}
+
+
+/* JOTA'S DESIGN SYSTEM | editorial monochrome */
+:root{font-family:"Arial",ui-sans-serif,system-ui,sans-serif;color:#181818;background:#efefed}
+body{background:#efefed}
+.shell{max-width:1680px;background:#f6f6f4;grid-template-columns:minmax(0,1fr) minmax(310px,370px)}
+.main{max-width:1120px;padding-left:clamp(22px,5.2vw,90px);padding-right:clamp(22px,5.2vw,90px)}
+.top{height:98px;border-bottom:1px solid #e3e3df;margin-bottom:28px}
+.brand{text-decoration:none;display:inline-flex;align-items:center}
+.brand-wordmark{font-family:Georgia,"Times New Roman",serif;font-size:1.65rem;font-weight:900;letter-spacing:-.06em;line-height:.78;color:#151515}
+.brand-wordmark small{display:block;font-family:Arial,sans-serif;font-size:.49rem;letter-spacing:.37em;line-height:2.5;font-weight:700;text-align:center}
+.header-lookup{border:1px solid #d4d4d0;background:transparent;border-radius:2px;letter-spacing:.02em;padding:12px 18px;box-shadow:none}
+.header-lookup:hover{background:#171717;color:white}
+.intro{display:grid;grid-template-columns:minmax(190px,.78fr) minmax(0,1.2fr);column-gap:clamp(22px,4vw,70px);align-content:center;min-height:380px;padding:clamp(30px,5vw,64px);background:#151515;border-radius:3px;margin-bottom:38px}
+.intro:before{width:420px;height:420px;right:-190px;top:-240px;box-shadow:0 0 0 65px #ffffff04,0 0 0 132px #ffffff03}
+.intro:after{display:none}
+.hero-identity{grid-row:1/5;grid-column:1;align-self:center;display:flex;align-items:center;justify-content:center;border-right:1px solid #ffffff21;padding-right:clamp(12px,3vw,48px);min-height:260px}
+.hero-brand-logo{display:block!important;width:100%;max-width:310px;max-height:285px;height:auto;object-fit:contain;object-position:center;margin:0!important}
+.intro>.eyebrow,.intro>h1,.intro>p,.intro>.hero-foot{grid-column:2}
+.intro .eyebrow{font-size:.65rem;color:#d1d1d1;letter-spacing:.25em}
+.intro h1{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:clamp(2.65rem,4.5vw,5.1rem);letter-spacing:-.06em;line-height:1.04;margin:20px 0 18px}
+.intro h1 em{font-style:italic;color:#bdbdbd;font-weight:400}
+.intro p{color:#bebebe;font-size:.91rem;max-width:390px;line-height:1.8}
+.hero-foot{display:flex;gap:22px;flex-wrap:wrap;margin-top:35px;padding-top:18px;border-top:1px solid #ffffff22;font-size:.61rem;font-weight:800;letter-spacing:.13em;color:#a7a7a7}
+.steps{gap:0;margin-bottom:34px;border-bottom:1px solid #d7d7d4}
+.step{background:transparent!important;border:0;border-bottom:2px solid transparent;border-radius:0;padding:14px 7px 17px;color:#969691;font-size:.8rem;text-align:left}
+.step b{font-family:Georgia,serif;font-size:.93rem;margin-right:10px}
+.step.active{border-color:#171717;color:#171717}
+.section-head{margin-bottom:22px}
+.section-head h2,.panel h2{font-family:Georgia,"Times New Roman",serif;font-size:clamp(1.75rem,2.8vw,2.25rem);font-weight:500;letter-spacing:-.045em}
+.section-head span{font-size:.75rem}
+.services{gap:17px;grid-template-columns:repeat(2,minmax(0,1fr))}
+.service.service-photo{border-radius:3px;box-shadow:none;border-color:#e1e1dc;transform:none}
+.service.service-photo:hover{box-shadow:0 12px 30px #00000013;border-color:#b8b8b2}
+.service.service-photo.selected{border-color:#181818;box-shadow:0 0 0 1px #181818}
+.service-media{aspect-ratio:1.85;background:#2b2b2b}
+.service-media img{filter:grayscale(100%) contrast(1.06);transition:transform .4s ease}
+.service:hover .service-media img{transform:scale(1.045)}
+.service-photo-caption{background:#151515a8;border-radius:1px;font-size:.58rem;letter-spacing:.05em}
+.service-selected-tag{border-radius:1px;background:#fff;color:#171717;font-weight:800}
+.service-body{padding:19px 21px 21px}
+.service-body h3{font-family:Georgia,serif;font-size:1.28rem;font-weight:600;letter-spacing:-.035em}
+.service-body .service-description{font-size:.78rem;min-height:0;color:#858581}
+.service-meta .price{font-size:1.1rem}
+.service-duration{background:#efefed;border-radius:2px;font-size:.72rem}
+.service-details summary{font-size:.76rem}
+.service-select{border-radius:2px;min-height:46px;background:#171717;color:#fff;border-color:#171717;font-weight:750;letter-spacing:.02em}
+.service-select:hover:not(:disabled){background:#414141;color:white}
+.service-select:disabled{background:#efefed;color:#777;border-color:#e4e4e0;opacity:1}
+.service.selected .service-select{background:#e8e8e5;color:#171717;border-color:#171717}
+.side{background:#141414;padding:53px 33px 28px}
+.side h2{font-family:Georgia,serif;font-weight:400;font-size:2.75rem;line-height:1.03;margin:70px 0 16px}
+.side h2 span{color:#777}
+.side .caption{line-height:1.65}
+.side .next{background:#f7f7f4;color:#171717;border-radius:2px}
+.summary-empty{border-radius:2px}
+.panel{border-radius:3px;box-shadow:none}
+.next,.date,.slot,.field input,.booking-card{border-radius:2px}
+.date.chosen,.slot.chosen{background:#181818;border-color:#181818}
+.legal{font-size:.72rem}
+@media(max-width:1100px){.intro{grid-template-columns:minmax(150px,.65fr) minmax(0,1.2fr);padding:38px}.hero-identity{min-height:230px}.intro h1{font-size:clamp(2.45rem,4vw,4.1rem)}}
+@media(max-width:980px){.shell{display:block}.main{max-width:850px}.side{display:none}.intro{grid-template-columns:minmax(180px,.75fr) 1.2fr}.mobile-bar{background:#141414}.mobile-bar .next{background:#f6f6f4;color:#171717}}
+@media(max-width:650px){.main{padding:0 16px 130px}.top{height:77px;margin-bottom:16px}.brand-wordmark{font-size:1.35rem}.header-lookup{padding:10px;font-size:.69rem}.intro{display:flex;flex-direction:column;min-height:0;padding:30px 26px 34px;margin-bottom:27px}.hero-identity{border-right:0;border-bottom:1px solid #ffffff24;min-height:0;padding:0 0 22px;margin-bottom:24px;justify-content:flex-start;width:100%}.hero-brand-logo{width:190px!important;max-height:160px!important;object-position:left}.intro h1{font-size:clamp(2.8rem,11vw,4.4rem);margin:15px 0}.intro p{font-size:.86rem}.hero-foot{margin-top:26px;font-size:.57rem;gap:10px}.services{grid-template-columns:1fr;gap:13px}.service-media{aspect-ratio:2.05}.service-body{padding:18px}.steps{margin-bottom:26px}.step{font-size:.68rem;padding:12px 2px}.step b{font-size:.77rem;margin-right:4px}.section-head h2{font-size:1.8rem}.mobile-bar{border-top:1px solid #ffffff26}.panel{padding:22px 18px}}
+@media(max-width:370px){.hero-brand-logo{width:160px!important}.intro h1{font-size:2.55rem}.brand-wordmark{font-size:1.2rem}}
