@@ -1,4 +1,4 @@
-const fallback=[['disfarcado','Corte disfarçado',40,40],['social','Corte social',33,40],['tesoura','Corte na tesoura',40,40],['sobrancelha','Sobrancelha',13,null],['barba','Barba',25,null],['pezinho','Pezinho',null,15],['cabelo_sobrancelha','Cabelo + sobrancelha',null,50],['cabelo_barba','Cabelo + barba',null,70],['luzes','Luzes platinadas',null,120],['platinado','Platinado completo',null,180]];
+const fallback=[['disfarcado','Corte disfarçado',40,40],['social','Corte social',33,40],['tesoura','Corte na tesoura',40,40],['sobrancelha','Sobrancelha',13,15],['barba','Barba',25,25],['pezinho','Pezinho',15,15],['cabelo_sobrancelha','Cabelo + sobrancelha',53,50],['cabelo_barba','Cabelo + barba',65,70],['luzes_platinadas','Luzes platinadas',null,120],['platinado','Platinado completo',null,null]];
 let services=fallback.map(([id,name,price,minutes])=>({id,name,price,minutes,description:''}));
 const state={step:1,selected:new Set(),date:null,time:null,slots:[],error:'',busy:false,confirmation:null,ready:false,emailInvites:false,barberPhone:''};
 const $=id=>document.getElementById(id),money=n=>new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(n),esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -13,7 +13,7 @@ const serviceInfo={
   barba:{detail:'Serviço de barba. Duração a confirmar com o Jota.',image:'/services/social.webp'},
   cabelo_sobrancelha:{detail:'Corte e sobrancelha, com duração total de 50 minutos. Preço do combo a confirmar.',image:'/services/disfarcado.webp'},
   cabelo_barba:{detail:'Corte e barba, com duração total de 70 minutos. Preço do combo a confirmar.',image:'/services/disfarcado.webp'},
-  luzes:{detail:'Luzes platinadas, com duração aproximada de 2 horas. Valor a confirmar.',image:'/services/pigmento.webp'},
+  luzes_platinadas:{detail:'Luzes platinadas, com duração aproximada de 2 horas. Valor a confirmar.',image:'/services/pigmento.webp'},
   platinado:{detail:'Platinado completo, com duração variável de 2 a 3 horas. Reservar até 3 horas até a configuração do tempo pelo administrador.',image:'/services/pigmento.webp'},
   kids:{detail:'Corte infantil, com estilo e acabamento definidos com o barbeiro.',image:'/services/social.webp'},
   sobrancelha:{detail:'Definição do desenho e limpeza dos fios ao redor da sobrancelha. O formato é combinado com o barbeiro antes do acabamento.',image:'/services/sobrancelha.webp'},
@@ -32,7 +32,7 @@ function serviceCard(s){
   return `<article class="service service-photo ${chosen?'selected':''}">
     <div class="service-media">${image?`<img src="${esc(image)}" alt="${esc(s.name)}: exemplo ilustrativo do serviço" width="960" height="640" loading="lazy" decoding="async" referrerpolicy="no-referrer">`:''}<span class="service-photo-caption">Foto ilustrativa</span>${chosen?'<span class="service-selected-tag">✓ Selecionado</span>':''}</div>
     <div class="service-body"><h3>${esc(s.name)}</h3><p class="service-description">${esc(s.description||'Confira o procedimento e escolha seu serviço.')}</p>
-    <div class="service-meta"><span class="price">${pendingPrice?'Valor a confirmar':money(s.price)}${s.id==='pigmento'?' <small> a partir de</small>':''}</span><span class="service-duration">${pendingTime?'Tempo a confirmar':Number(s.minutes)+' min'}</span></div>
+    <div class="service-meta"><span class="price">${pendingPrice?'A combinar':money(s.price)}${s.id==='pigmento'?' <small> a partir de</small>':''}</span><span class="service-duration">${pendingTime?'Tempo a confirmar':Number(s.minutes)+' min'}</span></div>
     <details class="service-details"><summary>Ver detalhes</summary><div class="service-detail-content"><p>${esc(s.details||info.detail||s.description||'Combine os detalhes do procedimento com o barbeiro.')}</p><dl><div><dt>Tempo estimado</dt><dd>${pendingTime?'A confirmar':Number(s.minutes)+' minutos'}</dd></div><div><dt>Valor${s.id==='pigmento'?' inicial':''}</dt><dd>${pendingPrice?'Valor a confirmar':money(s.price)}</dd></div></dl><p class="service-detail-note">Imagem de referência. O resultado é combinado com o barbeiro.</p></div></details>
     <button class="service-select" type="button" data-service="${esc(s.id)}" ${pendingPrice||pendingTime?'disabled title="Aguardando definição do valor ou duração"':''} aria-pressed="${chosen}" aria-label="${chosen?'Remover':'Selecionar'} ${esc(s.name)}">${pendingPrice||pendingTime?'Em configuração':chosen?'Serviço selecionado':'Adicionar serviço'}</button></div></article>`;
 }
