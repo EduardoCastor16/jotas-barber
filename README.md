@@ -52,3 +52,5 @@ Conta informada pelo proprietário para a integração: `Thiaghosts333@gmail.com
 - Não há cancelamento automático, política de reembolso, expiração de pendências nem notificações automáticas.
 - O painel ADMIN foi implementado no código, mas ainda não foi testado com o Apps Script implantado.
 - O script ainda não foi implantado na conta Google; não afirmar que o site está integrado.
+
+<!-- redeploy: verificar vínculo de segredos do Worker com implantação ativa; 2026-11-14 -->
