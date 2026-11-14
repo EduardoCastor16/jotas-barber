@@ -288,3 +288,39 @@ body{background:#111316!important}
 .service.scroll-reveal:hover{transform:translateY(-3px)}
 @media(max-width:650px){.cinematic-break{min-height:330px;padding:35px 25px;margin-bottom:36px}.cinematic-image{background-position:60% center;opacity:.46}.cinematic-break::before{background:linear-gradient(90deg,#10151ae8,#111b25a8)}.cinematic-content h2{font-size:clamp(2.6rem,10vw,4rem)}.ambient-backdrop::before{filter:grayscale(1) blur(27px);opacity:.075}.cinematic-content p{font-size:.86rem}}
 @media(prefers-reduced-motion:reduce){.scroll-reveal{opacity:1!important;transform:none!important;transition:none!important}.cinematic-image{transform:scale(1.1)!important;will-change:auto}}
+
+
+/* Monthly calendar | minimal premium scheduling */
+.booking-calendar-panel{padding:clamp(24px,4vw,52px)!important}
+.calendar-heading{margin-bottom:34px}
+.calendar-heading h2{margin:10px 0;font:400 clamp(2rem,4vw,3.5rem)/1.1 Georgia,serif}
+.calendar-heading p{max-width:680px;color:#c1cbd2}
+.calendar-layout{display:grid;grid-template-columns:minmax(310px,1fr) minmax(260px,.85fr);gap:clamp(24px,4vw,55px);align-items:start}
+.calendar{background:#f5f3ef;color:#152638;border:1px solid #b9c4cb;padding:clamp(15px,2vw,27px);border-radius:3px}
+.calendar-toolbar{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:23px}
+.calendar-toolbar h3{margin:0;text-align:center;font:500 clamp(1.2rem,2.2vw,1.65rem) Georgia,serif;text-transform:capitalize;color:#152638}
+.calendar-nav{display:grid;place-items:center;width:38px;height:38px;border:1px solid #cbd3d8;background:transparent;color:#19334b;border-radius:2px;font-size:1.7rem;line-height:1}
+.calendar-nav:hover:not(:disabled){background:#19334b;color:white}
+.calendar-nav:disabled{opacity:.28;cursor:default}
+.calendar-weekdays,.calendar-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}
+.calendar-weekdays{margin-bottom:8px}
+.calendar-weekdays span{text-align:center;font-size:.67rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:#63717b;padding:8px 0}
+.calendar-day{display:grid;place-items:center;aspect-ratio:1.12;min-width:0;border:1px solid transparent;background:#e8edf0;color:#19334b;border-radius:2px;font-weight:700;font-size:.88rem;transition:background .15s,border-color .15s}
+.calendar-day:hover:not(:disabled){border-color:#19334b;background:#d5e1e9}
+.calendar-day.chosen,.calendar-day.chosen:hover{background:#19334b;color:#fff;border-color:#19334b}
+.calendar-day:disabled{background:transparent;color:#a9adb0;opacity:.7;cursor:default}
+.calendar-legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:21px;font-size:.69rem;color:#63717b}
+.calendar-legend span{display:flex;align-items:center;gap:7px}
+.calendar-legend i{display:inline-block;width:10px;height:10px;background:#e8edf0;border:1px solid #c8d4dc}
+.calendar-legend span:last-child i{background:#19334b;border-color:#19334b}
+.calendar-times{padding:12px 0 0}
+.calendar-times h3{font:400 clamp(1.6rem,2.5vw,2.4rem) Georgia,serif;color:#f5f3ef;margin:13px 0}
+.calendar-help{color:#b6c4cd;font-size:.87rem;line-height:1.7}
+.calendar-times .slots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:23px}
+.calendar-times .slot{width:100%;padding:14px 7px;text-align:center}
+.calendar-feedback{color:#d4b3bd;font-size:.85rem;line-height:1.65;margin-top:20px}
+.booking-calendar-panel .after-hours{margin-top:38px;padding-top:27px;border-top:1px solid #42515e}
+.booking-calendar-panel .after-hours h3{font:400 1.45rem Georgia,serif}
+.booking-calendar-panel .after-hours p{color:#b9c6ce}
+@media(max-width:800px){.calendar-layout{grid-template-columns:1fr;gap:28px}.calendar-times{border-top:1px solid #40505d;padding-top:26px}.calendar-times .slots{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:480px){.booking-calendar-panel{padding:19px 14px!important}.calendar{padding:13px}.calendar-weekdays,.calendar-days{gap:3px}.calendar-day{font-size:.81rem}.calendar-weekdays span{font-size:.58rem}.calendar-legend{font-size:.61rem;gap:10px}.calendar-times .slots{grid-template-columns:repeat(3,minmax(0,1fr))}}
