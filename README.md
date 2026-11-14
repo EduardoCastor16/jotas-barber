@@ -18,3 +18,9 @@ O projeto NÃO usa a planilha, a agenda, o telefone ou o segredo do barbeiro ant
 ## Estado
 
 Fluxo visual e botões do modelo integrados; agendamento real desabilitado até a configuração e revisão do backend. Painel ADMIN com autenticação e aprovação de Pix ainda não implementado.
+
+## Conta Google de referência
+
+Conta informada pelo proprietário para a integração: `Thiaghosts333@gmail.com`.
+
+**Importante:** o endereço de e-mail identifica a conta pretendida, mas não concede acesso à agenda. O titular precisa autorizar o Apps Script/OAuth com essa conta; até lá, não existe sincronização ativa. Não colocar tokens, senhas ou chaves no repositório.
