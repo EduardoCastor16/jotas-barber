@@ -82,3 +82,8 @@ body,.shell,.main{background:#141414;color:#f3f3f3}
 .service-details summary{color:#303030}
 .step.active,.date.chosen,.slot.chosen{border-color:#f5f5f5}
 button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{outline-color:#a5a5a5}
+
+/* Logo branca sem fundo na headline */
+.brand-logo{width:64px;height:64px;object-fit:contain;background:transparent}
+.hero-brand-logo{display:block;width:min(320px,75%);height:auto;max-height:230px;object-fit:contain;object-position:left center;margin:0 0 22px;background:transparent}
+@media(max-width:620px){.hero-brand-logo{width:min(260px,85%);max-height:190px;margin-bottom:18px}}
