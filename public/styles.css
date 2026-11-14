@@ -231,3 +231,33 @@ body[data-has-selection="true"] .mobile-bar{display:flex!important;position:fixe
 body[data-has-selection="true"] .main{padding-bottom:170px!important}
 @media(max-width:1050px){.services{grid-template-columns:repeat(2,minmax(0,1fr))}.intro{grid-template-columns:minmax(170px,.7fr) 1fr}}
 @media(max-width:650px){.main{padding:0 17px 85px!important}.top{height:78px}.intro{display:flex;flex-direction:column;min-height:0;padding:32px 25px;margin:12px 0 34px}.hero-identity{width:100%;max-width:none}.intro h1{font-size:clamp(2.65rem,11vw,4rem)}.steps{margin-bottom:29px}.section-head{align-items:start}.section-head h2{font-size:2.25rem}.catalog-intro{font-size:.88rem}.services{grid-template-columns:1fr;gap:16px}.service-media{aspect-ratio:1.95}.service-body{padding:19px}.selection-hint{padding:16px 18px}body[data-has-selection="true"] .mobile-bar{bottom:10px;width:calc(100% - 20px);padding:12px 14px;gap:10px}.mobile-bar .selection-explore{display:none}.mobile-bar .next{min-width:0;width:auto!important;padding:14px 12px;font-size:.76rem}.mobile-bar strong{font-size:1.1rem}.mobile-bar small{font-size:.7rem}body[data-has-selection="true"] .main{padding-bottom:150px!important}}
+
+
+/* Full-bleed canvas: remove off-white side gutters and restore legible contrast */
+html,body{width:100%;min-height:100%;background:#111316!important;color:#f5f3ef}
+.shell{width:100%;max-width:none!important;margin:0!important;background:#111316!important}
+.main{max-width:1320px!important;margin:0 auto;background:transparent;color:#f5f3ef}
+.top{border-bottom-color:#35414b}
+.brand-wordmark{color:#f5f3ef}
+.brand-wordmark small{color:#c2cbd1}
+.header-lookup{background:#f5f3ef;color:#19334b;border-color:#f5f3ef}
+.header-lookup:hover{background:#dce7ee;color:#142a3e}
+.steps{border-bottom-color:#47515a}
+.step{color:#a8b4be}
+.step.active{color:#f5f3ef;border-bottom-color:#a64b60}
+.section-head h2,.panel h2{color:#f5f3ef}
+.section-head span,.catalog-intro{color:#c1cbd2}
+.eyebrow{color:#c69aa6}
+.service.service-photo{background:#f8f7f4;color:#15202b;border-color:#354451}
+.service-body h3{color:#19334b}
+.service-body .service-description{color:#52636e}
+.service-meta .price{color:#19334b}
+.service-details,.service-details summary{color:#19334b}
+.panel{background:#19222c;color:#f5f3ef;border-color:#40505d}
+.panel p,.panel h2,.panel h3,.panel label{color:#f5f3ef}
+.panel .field input{background:#fff;color:#142536}
+.date,.slot{background:#263442;color:#f5f3ef;border-color:#536577}
+.date.chosen,.slot.chosen{background:#294d69;border-color:#94adbf;color:white}
+.selection-hint{background:#1c3040;color:#d8e3e9;border-left-color:#a64b60}
+.legal{color:#aab5be}
+@media(max-width:650px){html,body,.shell{background:#111316!important}}
