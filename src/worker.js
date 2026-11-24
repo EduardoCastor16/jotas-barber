@@ -19,7 +19,20 @@ export default{async fetch(request,env){
   return new Response(JSON.stringify({ok:true}),{headers:{'Content-Type':'application/json','Cache-Control':'no-store','Set-Cookie':`jotas_admin=${expiry}.${sig}; Path=/api/; HttpOnly; Secure; SameSite=Strict; Max-Age=28800`}});
  }
  if(action==='admin-logout')return new Response(JSON.stringify({ok:true}),{headers:{'Content-Type':'application/json','Set-Cookie':'jotas_admin=; Path=/api/; HttpOnly; Secure; SameSite=Strict; Max-Age=0'}});
- const admin=['admin-list','admin-approve','admin-reject','admin-payment','admin-hours','admin-config','admin-club-list','admin-club-create','admin-club-update'].includes(action);
+ if(action.startsWith('client-')){
+  if(!env.CLIENT_SECRET)return json({ok:false,error:'Área do cliente em configuração'},503);
+  try{
+   const cookie=(value,age)=>new Response(JSON.stringify({ok:true}),{headers:{'Content-Type':'application/json','Cache-Control':'no-store','Set-Cookie':`jotas_client=${value}; Path=/api/; HttpOnly; Secure; SameSite=Strict; Max-Age=${age}`}});
+   if(action==='client-logout')return cookie('',0);
+   if(action==='client-login'){const b=await request.json(),d=await upstream(env,action,{phone:b.phone,code:b.code});if(!d.ok)return json({ok:false,error:'Acesso inválido'},401);const value=[d.phone,d.version,Date.now()+86400000].join('.');return cookie(value+'.'+await mac(env.CLIENT_SECRET,value),86400)}
+   if(action!=='client-profile')return json({ok:false,error:'Rota inválida'},404);
+   const raw=(request.headers.get('Cookie')||'').split(';').map(x=>x.trim()).find(x=>x.startsWith('jotas_client='))?.slice(13)||'';
+   const [phone,version,expiry,sig]=raw.split('.');
+   if(!/^55\\d{10,11}$/.test(phone)||!version||!expiry||Number(expiry)<Date.now()||!equal(sig,await mac(env.CLIENT_SECRET,[phone,version,expiry].join('.'))))return json({ok:false,error:'Entre novamente'},401);
+   const d=await upstream(env,action,{phone,version});return json(d,d.ok?200:401);
+  }catch{return json({ok:false,error:'Não foi possível acessar a conta'},502)}
+ }
+ const admin=['admin-client-access','admin-list','admin-approve','admin-reject','admin-payment','admin-hours','admin-config','admin-club-list','admin-club-create','admin-club-update'].includes(action);
  if(admin&&!(await authorized(request,env)))return json({ok:false,error:'Sessão expirada. Faça login novamente.'},401);
  if(!admin&&!['catalog','availability','book','lookup'].includes(action))return json({ok:false,error:'Rota inválida'},404);
  // Until Pix details and Google Apps Script deployment are verified, do not accept real bookings.
