@@ -19,7 +19,7 @@ export default{async fetch(request,env){
   return new Response(JSON.stringify({ok:true}),{headers:{'Content-Type':'application/json','Cache-Control':'no-store','Set-Cookie':`jotas_admin=${expiry}.${sig}; Path=/api/; HttpOnly; Secure; SameSite=Strict; Max-Age=28800`}});
  }
  if(action==='admin-logout')return new Response(JSON.stringify({ok:true}),{headers:{'Content-Type':'application/json','Set-Cookie':'jotas_admin=; Path=/api/; HttpOnly; Secure; SameSite=Strict; Max-Age=0'}});
- const admin=['admin-list','admin-approve','admin-reject','admin-payment','admin-hours','admin-config'].includes(action);
+ const admin=['admin-list','admin-approve','admin-reject','admin-payment','admin-hours','admin-config','admin-club-list','admin-club-create','admin-club-update'].includes(action);
  if(admin&&!(await authorized(request,env)))return json({ok:false,error:'Sessão expirada. Faça login novamente.'},401);
  if(!admin&&!['catalog','availability','book','lookup'].includes(action))return json({ok:false,error:'Rota inválida'},404);
  // Until Pix details and Google Apps Script deployment are verified, do not accept real bookings.
