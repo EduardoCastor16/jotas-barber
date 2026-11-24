@@ -25,5 +25,22 @@
       "simple": { "limit": 5, "period": 60 }
     }
   ],
-  "keep_vars": true
+  "keep_vars": true,
+  "previews": {
+    "vars": {
+      "BOOKING_ENABLED": "false"
+    },
+    "ratelimits": [
+      {
+        "name": "AUTH_IP_LIMIT",
+        "namespace_id": "44101",
+        "simple": { "limit": 15, "period": 60 }
+      },
+      {
+        "name": "AUTH_ACCOUNT_LIMIT",
+        "namespace_id": "44102",
+        "simple": { "limit": 5, "period": 60 }
+      }
+    ]
+  }
 }
