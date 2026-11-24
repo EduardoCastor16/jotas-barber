@@ -1,4 +1,4 @@
-const fallback=[['disfarcado','Corte disfarçado',40,40],['social','Corte social',33,40],['tesoura','Corte na tesoura',40,40],['sobrancelha','Sobrancelha',13,15],['barba','Barba',25,25],['pezinho','Pezinho',15,15],['cabelo_sobrancelha','Cabelo + sobrancelha',53,50],['cabelo_barba','Cabelo + barba',65,70],['luzes_platinadas','Luzes platinadas',null,120],['platinado','Platinado completo',null,null]];
+const fallback=[['disfarcado','Corte disfarçado',40,40],['social','Corte social',33,40],['tesoura','Corte na tesoura',40,40],['sobrancelha','Sobrancelha',13,15],['barba','Barba',25,25],['pezinho','Pezinho',15,15],['cabelo_sobrancelha','Cabelo + sobrancelha',54,50],['cabelo_barba','Cabelo + barba',63,70],['cabelo_barba_sobrancelha','Cabelo + barba + sobrancelha',76,85],['luzes_platinadas','Luzes platinadas',null,120],['platinado','Platinado completo',null,null]];
 let services=fallback.map(([id,name,price,minutes])=>({id,name,price,minutes,description:''}));
 const state={step:1,selected:new Set(),date:null,time:null,slots:[],error:'',busy:false,confirmation:null,ready:false,emailInvites:false,barberPhone:'',calendarOffset:0};
 const $=id=>document.getElementById(id),money=n=>new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format(n),esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -11,8 +11,9 @@ const contactButton=(message,label,extraClass='')=>{const url=whatsappLink(messa
 const serviceInfo={
   tesoura:{detail:'Corte executado com tesoura, com duração estimada de 40 minutos.',image:'/services/social.webp'},
   barba:{detail:'Serviço de barba. Duração a confirmar com o Jota.',image:'/services/social.webp'},
-  cabelo_sobrancelha:{detail:'Corte e sobrancelha, com duração total de 50 minutos. Preço do combo a confirmar.',image:'/services/disfarcado.webp'},
-  cabelo_barba:{detail:'Corte e barba, com duração total de 70 minutos. Preço do combo a confirmar.',image:'/services/disfarcado.webp'},
+  cabelo_sobrancelha:{detail:'Corte e sobrancelha, com duração total de 50 minutos. Valor avulso de R$ 54,00.',image:'/services/disfarcado.webp'},
+  cabelo_barba:{detail:'Corte e barba, com duração total de 70 minutos. Valor avulso de R$ 63,00.',image:'/services/disfarcado.webp'},
+  cabelo_barba_sobrancelha:{detail:'Corte, barba e sobrancelha em um único atendimento. Duração estimada de 85 minutos.',image:'/services/disfarcado.webp'},
   luzes_platinadas:{detail:'Luzes platinadas, com duração aproximada de 2 horas. Valor a confirmar.',image:'/services/pigmento.webp'},
   platinado:{detail:'Platinado completo, com duração variável de 2 a 3 horas. Reservar até 3 horas até a configuração do tempo pelo administrador.',image:'/services/pigmento.webp'},
   kids:{detail:'Corte infantil, com estilo e acabamento definidos com o barbeiro.',image:'/services/social.webp'},
