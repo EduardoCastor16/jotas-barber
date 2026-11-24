@@ -10,7 +10,7 @@ function cal_(){const id=cfg_().calendar_id||'primary',c=id==='primary'?Calendar
 function dt_(d,t){if(!/^\d{4}-\d\d-\d\d$/.test(d)||!/^\d\d:\d\d$/.test(t))throw Error('Data inválida');const x=new Date(d+'T'+t+':00-03:00');if(isNaN(x.getTime())||Utilities.formatDate(x,TZ,'yyyy-MM-dd HH:mm')!==d+' '+t)throw Error('Data inválida');return x}
 function selected_(ids){if(!Array.isArray(ids)||!ids.length||ids.length>7||new Set(ids).size!==ids.length)throw Error('Serviços inválidos');return ids.map(id=>{const s=services_().find(x=>x.id===id);if(!s)throw Error('Serviço indisponível');return s})}
 function activeBookings_(date,events,calendar){const sheet=sh_('Reservas'),data=sheet.getDataRange().getValues(),headers=data[0],col=n=>headers.indexOf(n),statusCol=col('status'),startCol=col('inicio_iso'),endCol=col('fim_iso'),eventCol=col('evento_calendar_id');if([statusCol,startCol,endCol,eventCol].some(i=>i<0))throw Error('Colunas de reservas incompletas');const day=dt_(date,'00:00').getTime(),next=day+86400000,eventIds=new Set(events.map(ev=>ev.getId())),active=[];data.slice(1).forEach((row,i)=>{if(!['confirmada','aguardando_pix'].includes(String(row[statusCol])))return;const start=new Date(row[startCol]).getTime(),end=new Date(row[endCol]).getTime();if(!(start<next&&end>day))return;const id=String(row[eventCol]||'');if(id&&!eventIds.has(id)){if(!calendar.getEventById(id))sheet.getRange(i+2,statusCol+1).setValue('cancelada');return}active.push({inicio_iso:row[startCol],fim_iso:row[endCol]})});return active}
-function slots_(b){const cfg=cfg_();if(cfg.horarios_exemplo!=='NAO')throw Error('Agenda em configuração: confirme os horários na planilha');const date=String(b.date||''),day=dt_(date,'00:00'),now=new Date(),list=selected_(b.services),duration=list.reduce((n,s)=>n+s.minutes,0);if(day.getTime()>now.getTime()+Number(cfg.dias_antecedencia||30)*86400000)throw Error('Data fora do período');const weekday=(day.getUTCDay()+6)%7+1,r=rows_('Horarios').find(x=>Number(x.dia_semana_1_seg_7_dom)===weekday);if(!r||!(r.ativo===true||String(r.ativo).toUpperCase()==='TRUE'))return {slots:[],list,duration};const open=dt_(date,String(r.abre)),close=dt_(date,String(r.fecha)),bs=r.intervalo_inicio?dt_(date,String(r.intervalo_inicio)):null,be=r.intervalo_fim?dt_(date,String(r.intervalo_fim)):null;const calendar=cal_(),events=calendar.getEvents(day,new Date(day.getTime()+86400000)),bookings=activeBookings_(date,events,calendar),slots=[];for(let t=open.getTime();t+duration*60000<=close.getTime();t+=Number(cfg.grade_minutos||15)*60000){const end=t+duration*60000;if(t<now.getTime()+Number(cfg.min_antecedencia_horas||2)*3600000)continue;if(bs&&be&&t<be.getTime()&&end>bs.getTime())continue;if(events.some(ev=>ev.isAllDayEvent()||t<ev.getEndTime().getTime()&&end>ev.getStartTime().getTime()))continue;if(bookings.some(x=>t<new Date(x.fim_iso).getTime()&&end>new Date(x.inicio_iso).getTime()))continue;slots.push(Utilities.formatDate(new Date(t),TZ,'HH:mm'))}return {slots,list,duration}}
+function slots_(b){const cfg=cfg_();if(cfg.horarios_exemplo!=='NAO')throw Error('Agenda em configuração: confirme os horários na planilha');const date=String(b.date||''),day=dt_(date,'00:00'),now=new Date(),list=selected_(b.services),duration=list.reduce((n,s)=>n+s.minutes,0);if(day.getTime()>now.getTime()+Number(cfg.dias_antecedencia||30)*86400000)throw Error('Data fora do período');const weekday=(day.getUTCDay()+6)%7+1,r=scheduleRows_().find(x=>Number(x.dia_semana_1_seg_7_dom)===weekday);if(!r||!(r.ativo===true||String(r.ativo).toUpperCase()==='TRUE'))return {slots:[],list,duration};const open=dt_(date,String(r.abre)),close=dt_(date,String(r.fecha)),bs=r.intervalo_inicio?dt_(date,String(r.intervalo_inicio)):null,be=r.intervalo_fim?dt_(date,String(r.intervalo_fim)):null;const calendar=cal_(),events=calendar.getEvents(day,new Date(day.getTime()+86400000)),bookings=activeBookings_(date,events,calendar),slots=[];for(let t=open.getTime();t+duration*60000<=close.getTime();t+=Number(cfg.grade_minutos||15)*60000){const end=t+duration*60000;if(t<now.getTime()+Number(cfg.min_antecedencia_horas||2)*3600000)continue;if(bs&&be&&t<be.getTime()&&end>bs.getTime())continue;if(events.some(ev=>ev.isAllDayEvent()||t<ev.getEndTime().getTime()&&end>ev.getStartTime().getTime()))continue;if(bookings.some(x=>t<new Date(x.fim_iso).getTime()&&end>new Date(x.inicio_iso).getTime()))continue;slots.push(Utilities.formatDate(new Date(t),TZ,'HH:mm'))}return {slots,list,duration}}
 function hash_(s){return Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256,s).map(b=>('0'+(b&255).toString(16)).slice(-2)).join('')}
 function phone_(s){const p=String(s||'').replace(/\D/g,'');if(!/^55\d{10,11}$/.test(p))throw Error('WhatsApp inválido');return p}
 function email_(value){const email=String(value||'').trim().toLowerCase();if(email&&(email.length>254||!/^\S+@\S+\.\S+$/.test(email)))throw Error('E-mail inválido');return email}
@@ -87,18 +87,35 @@ function adminPayment_(b){
   return {message:'Pagamento atualizado'}
  }finally{lock.releaseLock()}
 }
-function adminConfig_(){return {hours:rows_('Horarios').map(r=>({weekday:Number(r.dia_semana_1_seg_7_dom),open:String(r.abre||''),close:String(r.fecha||''),breakStart:String(r.intervalo_inicio||''),breakEnd:String(r.intervalo_fim||''),active:String(r.ativo).toUpperCase()==='TRUE'})),ready:cfg_().horarios_exemplo==='NAO'}}
+function scheduleRows_(){
+ const range=sh_('Horarios').getDataRange();
+ const values=range.getValues(), display=range.getDisplayValues(), headers=values[0];
+ const timeFields=new Set(['abre','fecha','intervalo_inicio','intervalo_fim']);
+ return values.slice(1).map((row,i)=>Object.fromEntries(headers.map((key,j)=>{
+  if(!timeFields.has(key))return [key,row[j]];
+  const label=String(display[i+1][j]||'').trim();
+  const match=/^(\d{1,2}):([0-5]\d)(?::[0-5]\d)?(?:\s*(AM|PM))?$/i.exec(label);
+  if(!match)return [key,label];
+  const hour=Number(match[1]);
+  const meridian=match[3]?.toUpperCase();
+  if(meridian&&(hour<1||hour>12))return [key,label];
+  const hour24=meridian?hour%12+(meridian==='PM'?12:0):hour;
+  return [key,String(hour24).padStart(2,'0')+':'+match[2]];
+ })));
+}
+function adminConfig_(){return {hours:scheduleRows_().map(r=>({weekday:Number(r.dia_semana_1_seg_7_dom),open:String(r.abre||''),close:String(r.fecha||''),breakStart:String(r.intervalo_inicio||''),breakEnd:String(r.intervalo_fim||''),active:String(r.ativo).toUpperCase()==='TRUE'})),ready:cfg_().horarios_exemplo==='NAO'}}
 function adminHours_(b){
  const lock=LockService.getScriptLock();if(!lock.tryLock(20000))throw Error('Tente novamente');
  try{
   const day=Number(b.weekday),active=b.active===true,open=String(b.open||''),close=String(b.close||''),bs=String(b.breakStart||''),be=String(b.breakEnd||'');
   if(!Number.isInteger(day)||day<1||day>7)throw Error('Dia inválido');
-  const toMin=s=>{if(!/^([01]\\d|2[0-3]):[0-5]\\d$/.test(s))throw Error('Horário inválido');return Number(s.slice(0,2))*60+Number(s.slice(3))};
+  const toMin=s=>{if(!/^([01]\d|2[0-3]):[0-5]\d$/.test(s))throw Error('Horário inválido');return Number(s.slice(0,2))*60+Number(s.slice(3))};
   if(active){if(toMin(close)<=toMin(open))throw Error('Fechamento deve ser depois da abertura');if(bs||be){if(!bs||!be||toMin(bs)<toMin(open)||toMin(be)>toMin(close)||toMin(be)<=toMin(bs))throw Error('Intervalo inválido')}}
   const sh=sh_('Horarios'),a=sh.getDataRange().getValues(),h=a[0],col=k=>h.indexOf(k),idx=a.findIndex((r,i)=>i>0&&Number(r[col('dia_semana_1_seg_7_dom')])===day);
   if(idx<1)throw Error('Dia não encontrado');
   [['abre',open],['fecha',close],['intervalo_inicio',bs],['intervalo_fim',be],['ativo',active]].forEach(([k,v])=>sh.getRange(idx+1,col(k)+1).setValue(v));
   const conf=sh_('Configuracoes'),v=conf.getDataRange().getValues(),ch=v.findIndex((r,i)=>i>0&&r[0]==='horarios_exemplo');if(ch>0)conf.getRange(ch+1,2).setValue('NAO');
+  SpreadsheetApp.flush();
   return {message:'Horários atualizados'}
  }finally{lock.releaseLock()}
 }
