@@ -29,3 +29,19 @@ button:focus-visible{outline:3px solid var(--j-wine);outline-offset:2px}
 .hours-row{border-color:#d4dce0}
 .hours-row strong{color:var(--j-navy)}
 footer{border-top-color:#cbd5db}
+.admin-dialog {
+  width: min(440px, calc(100% - 32px));
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  padding: clamp(20px, 5vw, 32px);
+  color: var(--j-ink);
+  background: var(--j-paper);
+  border: 1px solid #cfd7dc;
+  border-radius: 10px;
+  box-shadow: 0 20px 60px #11131640;
+}
+.admin-dialog::backdrop { background: #11131699; }
+.admin-dialog h2 { margin: 0; color: var(--j-navy); font: 400 30px/1.15 Georgia, serif; }
+.admin-dialog p { margin: 12px 0; color: #596974; }
+.admin-dialog label[hidden] { display: none; }
+.admin-dialog .actions { margin-top: 24px; }

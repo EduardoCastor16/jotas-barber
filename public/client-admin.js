@@ -20,7 +20,13 @@ clientAccessForm.addEventListener('submit', async event => {
 
   if (operation !== 'find') {
     if (selectedClient?.phone !== phone) return;
-    if (!confirm('Você confirmou a identidade de ' + selectedClient.name + '?')) return;
+    const title = operation === 'verify' ? 'Confirmar titularidade' : 'Gerar senha temporária';
+    if (!await showAdminDialog({
+      title,
+      message: 'Você confirmou a identidade de ' + selectedClient.name + '?',
+      action: title
+    })) return;
+    if (clientPhoneInput.value !== enteredPhone || selectedClient?.phone !== phone) return;
   }
 
   const actions = { find: 'find', verify: 'verify', reset: 'access' };
