@@ -54,6 +54,6 @@ export default{async fetch(request,env){
  if(admin&&!(await authorized(request,env)))return json({ok:false,error:'Sessão expirada. Faça login novamente.'},401);
  if(!admin&&!['catalog','availability','book','lookup'].includes(action))return json({ok:false,error:'Rota inválida'},404);
  // Until Pix details and Google Apps Script deployment are verified, do not accept real bookings.
- if(action==='book'&&env.BOOKING_ENABLED!=='true')return json({ok:false,error:'Agendamento online aguardando ativação e conferência do Pix.'},503);
+ if(action==='book'&&env.BOOKING_ENABLED!=='true')return json({ok:false,code:'BOOKING_DISABLED',error:'O agendamento pelo site ainda não está disponível. Combine seu horário com o barbeiro pelo WhatsApp.'},503);
  try{const body=await request.json();if(action==='admin-client-access'){if(!env.CLIENT_SECRET)return json({ok:false,error:'CLIENT_SECRET ausente'},503);const password=saltNew(),salt=saltNew(),hash=await passwordHash(env,password,salt),d=await upstream(env,action,{phone:body.phone,salt,hash});return json(d.ok?{ok:true,code:password}:d,d.ok?200:400)}const result=await upstream(env,action,body);return json(result,result.ok?200:400)}catch(e){return json({ok:false,error:String(e.message||e)},502)}
 }};
