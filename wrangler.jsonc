@@ -28,7 +28,8 @@
   "keep_vars": true,
   "previews": {
     "vars": {
-      "BOOKING_ENABLED": "false"
+      "BOOKING_ENABLED": "false",
+      "APPS_SCRIPT_URL": "https://script.google.com/macros/s/AKfycbwDfdai3RYX_MsHalp7Hyqkd8uYG4NJBOoJnekk90zHo6q_Q0w2KhxsV_WrNvyH3WNr/exec"
     },
     "ratelimits": [
       {
