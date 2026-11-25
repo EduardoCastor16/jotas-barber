@@ -11,6 +11,7 @@
     "not_found_handling": "single-page-application"
   },
   "vars": {
+    "BOOKING_ENABLED": "true",
     "APPS_SCRIPT_URL": "https://script.google.com/macros/s/AKfycbxZ0tltUgZYa90zG3wWo4k6bRAFkdHSkuyQrI0gIorb33IrRoz8NqlKJbgtOQukV76A/exec"
   },
   "ratelimits": [
