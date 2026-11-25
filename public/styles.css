@@ -327,8 +327,14 @@ body{background:#111316!important}
 
 
 /* Club prominence and compact mobile service catalog */
-.top .club-nav{display:inline-flex;align-items:center;justify-content:center;background:#792b39;color:#fff;text-decoration:none;font-weight:750;padding:12px 18px;border:1px solid #a65b6b;border-radius:5px;white-space:nowrap}
-.club-nav:hover,.club-cta:hover{background:#963b4d;color:#fff}
+.top-nav{display:flex;align-items:center;justify-content:flex-end;gap:clamp(4px,2vw,20px)}
+.top-nav a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 12px;font-size:.86rem;font-weight:750;text-decoration:none;white-space:nowrap}
+.top-nav .club-nav{color:#dce7ee}
+.top-nav .club-nav:hover{text-decoration:underline;text-underline-offset:4px}
+.top-nav .account-nav{background:#f5f3ef;color:#19334b;border-radius:5px}
+.top-nav .account-nav:hover{background:#dce7ee}
+.lookup-link{background:none;border:0;padding:6px 0;color:#dce7ee;font:inherit;font-size:.82rem;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.club-cta:hover{background:#963b4d;color:#fff}
 .club-feature{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:space-between;gap:24px;margin:0 0 36px;padding:clamp(24px,4vw,48px);border:1px solid #a65b6b;border-radius:8px;background:linear-gradient(115deg,#43212c,#19334b);color:#fff}
 .club-feature h2{font:400 clamp(30px,4vw,48px)/1.08 Georgia,serif;margin:10px 0;color:#fff}
 .club-feature p{color:#e3dce0;margin:8px 0;line-height:1.5}
@@ -337,7 +343,7 @@ body{background:#111316!important}
 body[data-step="2"] .club-feature,body[data-step="3"] .club-feature{display:none}
 @media(max-width:650px){
 .top{height:auto!important;min-height:78px;display:flex;flex-wrap:wrap;gap:8px;padding:12px 0!important}
-.top .club-nav,.top .header-lookup{font-size:11px;padding:10px 9px;white-space:normal;text-align:center}
+.top-nav a{font-size:.75rem;padding-inline:9px}
 .club-feature{flex-direction:column;align-items:stretch;gap:15px;padding:23px;margin-bottom:26px}
 .club-feature h2{font-size:32px}.club-feature p{font-size:13px}
 #content .services{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;align-items:stretch}
